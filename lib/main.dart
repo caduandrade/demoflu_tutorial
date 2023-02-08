@@ -3,22 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:tutorial/examples/stateless.dart';
 
 void main() {
-  runApp(DemoFluApp(title: 'Tutorial', menuItems: [
-    DemoMenuItem(name: 'Section'),
-    DemoMenuItem(name: 'Stateless', example: StatelessExample(), indent: 2)
-  ]));
+  runApp(DemoFluApp(title: 'Tutorial', rootMenus: [_firstExample, _section]));
 }
 
-void alternativeMain() {
-  runApp(DemoFluApp(title: 'Tutorial', menuItems: _menuItems()));
-}
+DemoMenuItem get _firstExample =>
+    DemoMenuItem('First', example: StatelessExample());
 
-List<DemoMenuItem> _menuItems() {
-  var builder = DemoMenuItem.builder();
-  builder
-    ..indent(1)
-    ..add('Section')
-    ..indent(2)
-    ..add('Stateless', example: StatelessExample());
-  return builder.menuItems;
-}
+DemoMenuItem get _section =>
+    DemoMenuItem('Section', children: [_secondExample]);
+
+DemoMenuItem get _secondExample =>
+    DemoMenuItem('Second', example: StatelessExample());
